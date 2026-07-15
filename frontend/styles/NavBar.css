@@ -1,0 +1,134 @@
+/* src/styles/NavBar.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--nav-bg); /* Use the opaque navigation background variable */
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px; /* Fixed height for clean spacing and main offset */
+  z-index: 100;
+  opacity: 1; /* Explicitly opaque to prevent scrolling visibility issues */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtly defined edge */
+  padding: 0 40px;
+}
+
+/* FIX: Child link containers should be vertically centered and horizontally positioned correctly within their blocks */
+.left_navbar, .center_navbar, .right_navbar {
+  display: flex;
+  align-items: center;
+}
+
+.left_navbar {
+  justify-content: flex-start;
+}
+.right_navbar {
+  justify-content: flex-end;
+}
+
+.left_navbar .logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  transition: var(--transition);
+}
+
+.left_navbar .logo:hover {
+  color: var(--accent-purple);
+}
+
+.center_navbar {
+  justify-content: center; /* Center horizontally in the central nav block */
+  gap: 30px;
+}
+
+.center-link {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.center-link:hover {
+  color: var(--text-primary);
+}
+
+.right_navbar {
+  gap: 15px;
+}
+
+.theme_btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 8px;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.theme_btn:hover {
+  background-color: var(--border-color);
+  color: var(--rating-gold); /* Moon glows yellow on hover */
+}
+
+.sign_in_btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 8px 16px;
+}
+
+.sign_in_btn:hover {
+  color: var(--text-primary);
+}
+
+/* FIX: Redefine the Sign Up button to be a solid purple-themed button as inspired by references */
+.sign_up_btn {
+  background-color: var(--accent-purple); /* Solid accent color from references */
+  color: #ffffff; /* White text for high contrast */
+  border: none;
+  border-radius: 100px;
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(116, 81, 241, 0.3); /* Defined edges */
+}
+
+.sign_up_btn:hover {
+  filter: brightness(1.1); /* Slightly brighten on hover */
+  transform: scale(1.03);
+}
+
+/* Original mobile response for navbar */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 20px;
+    height: auto;
+    position: static; /* Let it flow on mobile if too tall */
+  }
+  .center_navbar {
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+  }
+  .right_navbar {
+    width: 100%;
+    justify-content: center;
+  }
+}

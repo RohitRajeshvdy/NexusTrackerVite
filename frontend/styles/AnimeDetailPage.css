@@ -1,0 +1,170 @@
+/* src/styles/AnimeDetailPage.css */
+.detail-page-container {
+  max-width: 1200px; /* Match the pages container width */
+  margin: 0 auto 60px auto; /* Centered with vertical spacing */
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+/* FIX: Redefine the detail-header to center its content and improve padding to prevent excessive text wrapping issues */
+.detail-header {
+  text-align: center; /* Center all contents */
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--border-color);
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.detail-title {
+  font-size: 2.2rem; /* Slightly decrease size from 2.4rem to prevent excessive multi-lining */
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  word-wrap: break-word; /* Allow multi-lining cleanly without element overlap issues */
+}
+
+.detail-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Main layout split */
+.detail-content-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .detail-content-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .detail-sidebar {
+    margin: 0 auto;
+    max-width: 300px;
+  }
+}
+
+.detail-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.detail-poster {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  transition: var(--transition);
+}
+
+.detail-poster:hover {
+  transform: scale(1.02);
+}
+
+.sidebar-meta-group {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.meta-label {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.meta-value {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Main Content Panel */
+.detail-main-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.info-metadata-chips {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.metadata-row {
+  display: flex;
+  align-items: baseline;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.metadata-label {
+  width: 120px;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.metadata-value {
+  color: var(--text-primary);
+}
+
+.detail-synopsis-section {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+}
+
+.synopsis-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+/* Beautiful accent indicator beneath the heading */
+.synopsis-heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 3px;
+  background-color: var(--accent-purple);
+  border-radius: 2px;
+}
+
+.synopsis-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}

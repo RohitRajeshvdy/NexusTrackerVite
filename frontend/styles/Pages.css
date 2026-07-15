@@ -1,0 +1,16 @@
+.anime-page-container,
+.manga-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px 60px 40px;
+}
+
+.anime-page-container h2,
+.manga-page-container h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 40px 0 20px 0;
+  position: relative;
+  padding-left: 14px;
+}
