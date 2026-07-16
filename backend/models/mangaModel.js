@@ -29,7 +29,7 @@
 
 function filterMangaJSONData(FullData) {
   const manga = FullData.data;
-  
+
   return {
     mal_id: manga.mal_id,
     mal_url: manga.url,
@@ -53,6 +53,7 @@ function filterMangaJSONData(FullData) {
     themes: manga.themes,
     demographics: manga.demographics,
     relations: manga.relations,
+    pagination : FullData.pagination,
   };
 }
 

@@ -59,6 +59,7 @@ function filterAnimeJSONData(FullData) {
     themes: anime.themes,
     demographics: anime.demographics,
     explicit_genres: anime.explicit_genres,
+    pagination: FullData.pagination,
   };
 }
 

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import Grid from "./Grid";
 import SearchBar from "./SearchBar";
-import "../styles/Pages.css"; // Link styling
+import "../styles/Pages.css";
+
 
 export default function AnimePage() {
   const [animeResult, setAnimeResult] = useState([]);

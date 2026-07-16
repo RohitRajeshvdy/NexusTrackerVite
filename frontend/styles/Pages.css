@@ -1,10 +1,16 @@
+/* src/styles/Pages.css */
+
+/* Force both page containers to behave as full-width blocks */
 .anime-page-container,
 .manga-page-container {
-  max-width: 1200px;
+  display: block;          /* Prevents child elements from squishing or centering incorrectly */
+  width: 100%;
+  max-width: 1200px;       /* Allows the grid to expand fully up to 5+ columns */
   margin: 0 auto;
   padding: 0 40px 60px 40px;
 }
 
+/* Standarize headings for both pages */
 .anime-page-container h2,
 .manga-page-container h2 {
   font-size: 1.4rem;
@@ -13,4 +19,26 @@
   margin: 40px 0 20px 0;
   position: relative;
   padding-left: 14px;
+  text-align: left;        /* Forces titles to be left-aligned */
+}
+
+/* Purple accent indicator badge on the left side of section titles */
+.anime-page-container h2::before,
+.manga-page-container h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 4px;
+  background-color: var(--accent-purple);
+  border-radius: 2px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .anime-page-container,
+  .manga-page-container {
+    padding: 0 16px 40px 16px;
+  }
 }
