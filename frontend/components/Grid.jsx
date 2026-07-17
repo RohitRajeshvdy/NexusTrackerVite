@@ -3,7 +3,7 @@ import "../styles/Grid.css";
 
 export default function Grid({ animeList , type }) {
   if (!Array.isArray(animeList) || animeList.length === 0) {
-    return <div className="error-text">No results to show.</div>;
+    return <div className="error-text">Loading...</div>;
   }
 
   return (

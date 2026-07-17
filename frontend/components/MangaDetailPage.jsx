@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import "../styles/AnimeDetailPage.css"; 
+import "../styles/AnimeDetailPage.css";
+
+import TrackerWidget from "../components/TrackerWidget";
 
 export default function MangaDetailPage() {
   const { id } = useParams();
@@ -46,6 +48,13 @@ export default function MangaDetailPage() {
             width="250px"
           />
 
+          <TrackerWidget
+            mal_id={id}
+            title={mangaDetail.title}
+            mediaType="manga"
+            totalEpisodes={mangaDetail.episodes}
+          />
+
           <div className="sidebar-meta-group">
             <div className="meta-item">
               <span className="meta-label">Status:</span>
@@ -53,7 +62,9 @@ export default function MangaDetailPage() {
             </div>
             <div className="meta-item">
               <span className="meta-label">Chapters:</span>
-              <span className="meta-value">{mangaDetail.chapters || "N/A"}</span>
+              <span className="meta-value">
+                {mangaDetail.chapters || "N/A"}
+              </span>
             </div>
             <div className="meta-item">
               <span className="meta-label">Volumes:</span>
@@ -61,7 +72,9 @@ export default function MangaDetailPage() {
             </div>
             <div className="meta-item">
               <span className="meta-label">Score:</span>
-              <span className="meta-value">⭐ {mangaDetail.score || "N/A"}</span>
+              <span className="meta-value">
+                ⭐ {mangaDetail.score || "N/A"}
+              </span>
             </div>
             <div className="meta-item">
               <span className="meta-label">Published:</span>
@@ -76,19 +89,23 @@ export default function MangaDetailPage() {
             <div className="metadata-row">
               <strong className="metadata-label">Authors:</strong>{" "}
               <span className="metadata-value">
-                {mangaDetail.authors?.map((author) => author.name).join(", ") || "Unknown"}
+                {mangaDetail.authors?.map((author) => author.name).join(", ") ||
+                  "Unknown"}
               </span>
             </div>
             <div className="metadata-row">
               <strong className="metadata-label">Genres:</strong>{" "}
               <span className="metadata-value">
-                {mangaDetail.genres?.map((genre) => genre.name).join(", ") || "None"}
+                {mangaDetail.genres?.map((genre) => genre.name).join(", ") ||
+                  "None"}
               </span>
             </div>
             <div className="metadata-row">
               <strong className="metadata-label">Serialization:</strong>{" "}
               <span className="metadata-value">
-                {mangaDetail.serializations?.map((ser) => ser.name).join(", ") || "None"}
+                {mangaDetail.serializations
+                  ?.map((ser) => ser.name)
+                  .join(", ") || "None"}
               </span>
             </div>
           </div>

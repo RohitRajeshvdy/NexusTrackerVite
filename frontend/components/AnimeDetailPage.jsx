@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 
 import "../styles/AnimeDetailPage.css";
 
+import TrackerWidget from "../components/TrackerWidget";
+
 export default function AnimeDetailPage() {
   const { id } = useParams();
   const [animeDetail, setAnimeDetail] = useState(null);
@@ -44,6 +46,13 @@ export default function AnimeDetailPage() {
             alt={animeDetail.title}
             className="detail-poster"
             width="250px"
+          />
+
+          <TrackerWidget
+            mal_id={id}
+            title={animeDetail.title}
+            mediaType="anime"
+            totalEpisodes={animeDetail.episodes}
           />
 
           <div className="sidebar-meta-group">

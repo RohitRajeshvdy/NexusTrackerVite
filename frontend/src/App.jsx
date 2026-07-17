@@ -21,7 +21,7 @@ function App() {
         <Route path="/anime/:id" element={<AnimeDetailPage />} />
         <Route path="/manga" element={<MangaPage />} />
         <Route path="/manga/:id" element={<MangaDetailPage />} />
-        <Route path="/games" element={<div>Games Page Layout</div>} />
+        <Route path="/games" element={<div>Games Page Layout coming soon....</div>} />
       </Routes>
     </Router>
   );
