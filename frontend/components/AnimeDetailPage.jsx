@@ -53,6 +53,8 @@ export default function AnimeDetailPage() {
             title={animeDetail.title}
             mediaType="anime"
             totalEpisodes={animeDetail.episodes}
+            image={animeDetail.image}
+            genres={animeDetail.genres}
           />
 
           <div className="sidebar-meta-group">

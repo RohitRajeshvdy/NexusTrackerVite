@@ -52,7 +52,9 @@ export default function MangaDetailPage() {
             mal_id={id}
             title={mangaDetail.title}
             mediaType="manga"
-            totalEpisodes={mangaDetail.episodes}
+            totalEpisodes={mangaDetail.chapters}
+            image={mangaDetail.image}
+            genres={mangaDetail.genres}
           />
 
           <div className="sidebar-meta-group">

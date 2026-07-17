@@ -6,6 +6,8 @@ export default function TrackerWidget({
   title,
   mediaType,
   totalEpisodes,
+  image,
+  genres
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [status, setStatus] = useState("untracked");
@@ -61,6 +63,8 @@ export default function TrackerWidget({
           mal_id: Number(mal_id),
           title,
           mediaType,
+          image,
+          genres,
           status: finalStatus,
           episodesWatched: Number(episodesWatched),
           rating: Number(rating),
@@ -73,6 +77,30 @@ export default function TrackerWidget({
       setIsOpen(false);
     } catch (error) {
       console.error("Error updating database entry:", error);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const deleteTrackingData = async () => {
+    if (status === "untracked") return;
+    setIsSaving(true);
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/db/deletedata/${mediaType}/${mal_id}`,
+        { method: "DELETE" },
+      );
+
+      if (!response.ok) throw new Error("Failed to delete record");
+
+      // Reset frontend fields back to defaults
+      setStatus("untracked");
+      setEpisodesWatched(0);
+      setRating(0);
+      setIsOpen(false);
+    } catch (error) {
+      console.error("Error deleting database entry:", error);
     } finally {
       setIsSaving(false);
     }
@@ -169,6 +197,15 @@ export default function TrackerWidget({
         >
           Update Statistics
         </button>
+        {status !== "untracked" && (
+          <button
+            className="tracker-delete-btn"
+            onClick={deleteTrackingData}
+            disabled={status === "untracked" || isSaving}
+          >
+            delete
+          </button>
+        )}
       </div>
     </div>
   );

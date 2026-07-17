@@ -12,6 +12,26 @@ const trackingSchema = new Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+      required: true,
+    },
+    genres: [
+      {
+        mal_id: {
+          type: Number,
+        },
+        type: {
+          type: String,
+        },
+        name: {
+          type: String,
+        },
+        url: {
+          type: String,
+        },
+      },
+    ],
     mediaType: {
       type: String,
       required: true,

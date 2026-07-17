@@ -1,10 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-const { getData, postData, getSingleData } = require("../controllers/trackingController");
+const {
+  getData,
+  postData,
+  getSingleData,
+  deleteSingleData,
+} = require("../controllers/trackingController");
 
 router.get("/getdata", getData);
 router.post("/postdata", postData);
-router.get("/getdata/:mediaType/:mal_id",getSingleData);
+router.get("/getdata/:mediaType/:mal_id", getSingleData);
+router.delete("/deletedata/:mediaType/:mal_id", deleteSingleData);
 
 module.exports = router;
