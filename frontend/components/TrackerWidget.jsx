@@ -1,113 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import useTracker from "../hooks/useTracker";
+
 import "../styles/TrackerWidget.css";
 
-export default function TrackerWidget({
-  mal_id,
-  title,
-  mediaType,
-  totalEpisodes,
-  image,
-  genres
-}) {
+export default function TrackerWidget(props) {
+  const { mediaType, totalEpisodes } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const [status, setStatus] = useState("untracked");
-  const [episodesWatched, setEpisodesWatched] = useState(0);
-  const [rating, setRating] = useState(0);
-  const [isSaving, setIsSaving] = useState(false);
 
-  useEffect(() => {
-    async function fetchExistingTracking() {
-      if (!mal_id || !mediaType) return;
-
-      try {
-        const response = await fetch(
-          `http://localhost:3000/db/getdata/${mediaType}/${mal_id}`,
-        );
-        if (!response.ok) throw new Error("Failed to fetch tracking data");
-
-        const data = await response.json();
-
-        // If data exists in the DB, update the component states
-        if (data) {
-          setStatus(data.status);
-          setEpisodesWatched(data.episodesWatched || 0);
-          setRating(data.rating || 0);
-        } else {
-          // Reset to defaults if switching to an anime that isn't tracked yet
-          setStatus("untracked");
-          setEpisodesWatched(0);
-          setRating(0);
-        }
-      } catch (error) {
-        console.error("Error loading tracking status:", error);
-      }
-    }
-
-    fetchExistingTracking();
-  }, [mal_id, mediaType]);
-
-  // Sends state to your /db/postdata backend route
-  const saveTrackingData = async (updatedStatus = status) => {
-    setIsSaving(true);
-
-    const finalStatus =
-      updatedStatus === "untracked" ? "planning" : updatedStatus;
-
-    try {
-      const response = await fetch("http://localhost:3000/db/postdata", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          mal_id: Number(mal_id),
-          title,
-          mediaType,
-          image,
-          genres,
-          status: finalStatus,
-          episodesWatched: Number(episodesWatched),
-          rating: Number(rating),
-        }),
-      });
-
-      if (!response.ok) throw new Error("Network error");
-
-      setStatus(finalStatus);
-      setIsOpen(false);
-    } catch (error) {
-      console.error("Error updating database entry:", error);
-    } finally {
-      setIsSaving(false);
-    }
-  };
-
-  const deleteTrackingData = async () => {
-    if (status === "untracked") return;
-    setIsSaving(true);
-
-    try {
-      const response = await fetch(
-        `http://localhost:3000/db/deletedata/${mediaType}/${mal_id}`,
-        { method: "DELETE" },
-      );
-
-      if (!response.ok) throw new Error("Failed to delete record");
-
-      // Reset frontend fields back to defaults
-      setStatus("untracked");
-      setEpisodesWatched(0);
-      setRating(0);
-      setIsOpen(false);
-    } catch (error) {
-      console.error("Error deleting database entry:", error);
-    } finally {
-      setIsSaving(false);
-    }
-  };
+  // Bring in all our backend state & functions
+  const {
+    status,
+    episodesWatched,
+    setEpisodesWatched,
+    rating,
+    setRating,
+    isSaving,
+    saveTrackingData,
+    deleteTrackingData,
+  } = useTracker(props);
 
   const handleStatusSelect = (newStatus) => {
     saveTrackingData(newStatus);
+    setIsOpen(false);
   };
 
   return (
@@ -166,7 +80,7 @@ export default function TrackerWidget({
       <div className="tracker-metrics-panel">
         <div className="metric-input-field">
           <label className="metric-label">
-            {mediaType === "anime" ? "Episodes Watched:" : "Chapters Read"}
+            {mediaType === "anime" ? "Episodes Watched:" : "Chapters Read:"}
           </label>
           <input
             type="number"
@@ -197,13 +111,14 @@ export default function TrackerWidget({
         >
           Update Statistics
         </button>
+
         {status !== "untracked" && (
           <button
             className="tracker-delete-btn"
             onClick={deleteTrackingData}
-            disabled={status === "untracked" || isSaving}
+            disabled={isSaving}
           >
-            delete
+            Delete
           </button>
         )}
       </div>

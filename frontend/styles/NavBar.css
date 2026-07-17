@@ -132,3 +132,21 @@
     justify-content: center;
   }
 }
+
+/* Style for the active link */
+.center-link.active {
+  color: var(--accent-blue); /* Highlights the text in your accent color */
+  position: relative;
+}
+
+/* Optional: Adds a premium, clean indicator line below the active link */
+.center-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-blue);
+  border-radius: 2px;
+}

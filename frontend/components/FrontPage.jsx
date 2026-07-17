@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Grid from "./Grid";
+import Carousel from "./Carousal";
 
 import "../styles/FrontPage.css";
 
@@ -38,9 +38,9 @@ export default function FrontPage() {
   return (
     <>
       <h2>Anime</h2>
-      <Grid animeList={animeList} type="anime" />
+      <Carousel animeList={animeList} type="anime" />
       <h2>Manga</h2>
-      <Grid animeList={mangaList} type="manga" />
+      <Carousel animeList={mangaList} type="manga" />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "../styles/NavBar.css";
 
 export default function NavBar() {
@@ -10,15 +10,15 @@ export default function NavBar() {
         </Link>
       </div>
       <div className="center_navbar">
-        <Link className="center-link" to="/anime">
+        <NavLink className="center-link" to="/anime">
           Anime
-        </Link>
-        <Link className="center-link" to="/manga">
+        </NavLink>
+        <NavLink className="center-link" to="/manga">
           Manga
-        </Link>
-        <Link className="center-link" to="/games">
+        </NavLink>
+        <NavLink className="center-link" to="/games">
           Games
-        </Link>
+        </NavLink>
       </div>
       <div className="right_navbar">
         <button className="theme_btn">🌙</button>
