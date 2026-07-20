@@ -122,7 +122,7 @@ const getFullMangaDetail = async (req, res) => {
     res.json(filteredData);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Something went wrong fetching anime data" });
+    res.status(500).json({ error: "Something went wrong fetching manga data" });
   }
 };
 

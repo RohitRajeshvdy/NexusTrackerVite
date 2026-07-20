@@ -1,8 +1,16 @@
 const TrackingSchema = require("../models/trackingSchema");
 
 const postData = async (req, res) => {
-  const { mal_id, title, mediaType, status, episodesWatched, rating, image, genres } =
-    req.body;
+  const {
+    mal_id,
+    title,
+    mediaType,
+    status,
+    episodesWatched,
+    rating,
+    image,
+    genres,
+  } = req.body;
 
   try {
     const updatedEntry = await TrackingSchema.findOneAndUpdate(
@@ -66,7 +74,9 @@ const deleteSingleData = async (req, res) => {
     res
       .status(200)
       .json({ message: "Record successfully deleted", deletedData });
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 module.exports = { getData, postData, getSingleData, deleteSingleData };
