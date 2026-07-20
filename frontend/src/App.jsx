@@ -2,12 +2,12 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Components
-import NavBar from "../components/NavBar";
-import AnimePage from "../components/AnimePage";
-import MangaPage from "../components/MangaPage";
-import AnimeDetailPage from "../components/AnimeDetailPage";
-import MangaDetailPage from "../components/MangaDetailPage";
-import FrontPage from "../components/FrontPage";
+import NavBar from "./components/NavBar";
+import AnimePage from "./components/AnimePage";
+import MangaPage from "./components/MangaPage";
+import AnimeDetailPage from "./components/AnimeDetailPage";
+import MangaDetailPage from "./components/MangaDetailPage";
+import FrontPage from "./components/FrontPage";
 
 function App() {
   return (

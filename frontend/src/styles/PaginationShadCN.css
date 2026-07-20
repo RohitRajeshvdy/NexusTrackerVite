@@ -1,0 +1,57 @@
+/* src/styles/Pagination.css */
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  padding: 32px 0;
+  width: 100%;
+}
+
+.pagination-content {
+  display: flex;
+  align-items: center;
+  gap: 12px !important; /* Forces clean spacing between buttons */
+  list-style: none;
+}
+
+/* Previous & Next Buttons */
+.pagination-btn {
+  background-color: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 8px 16px !important;
+  height: auto !important;
+  width: auto !important;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.pagination-btn:hover:not(.disabled) {
+  background-color: var(--border-color) !important;
+  color: var(--accent-blue) !important;
+  border-color: var(--accent-blue) !important;
+}
+
+/* Disabled State */
+.pagination-btn.disabled {
+  opacity: 0.4 !important;
+  pointer-events: none !important;
+  cursor: not-allowed !important;
+}
+
+/* FIX: Removes fixed square size constraint so "1 of 6" fits naturally */
+.pagination-page-indicator {
+  width: auto !important;
+  height: auto !important;
+  padding: 8px 18px !important;
+  background-color: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--accent-purple) !important; /* Highlights active page */
+  border-radius: var(--radius-md) !important;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 0 12px rgba(116, 81, 241, 0.2);
+}

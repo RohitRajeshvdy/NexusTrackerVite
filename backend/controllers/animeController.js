@@ -3,13 +3,14 @@ const { filterAnimeJSONData } = require("../models/animeModel.js");
 const getAnimeSearch = async (req, res) => {
   try {
     const animeName = req.query.q;
+    const page = req.query.page || 1;
 
     if (!animeName) {
       return res.status(400).json({ error: "Type something to search" });
     }
 
     const sanitizedQuery = encodeURIComponent(animeName);
-    const tenraiURL = `https://api.tenrai.org/v1/anime?q=${sanitizedQuery}`;
+    const tenraiURL = `https://api.tenrai.org/v1/anime?q=${sanitizedQuery}&page=${page}`;
 
     const tenraiResponse = await fetch(tenraiURL);
 
@@ -39,7 +40,10 @@ const getAnimeSearch = async (req, res) => {
       };
     });
 
-    res.json(filteredData);
+    res.json({
+      data: filteredData,
+      pagination: FullJSON.pagination || null,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Something went wrong fetching anime data" });
@@ -48,7 +52,10 @@ const getAnimeSearch = async (req, res) => {
 
 const currentSeason = async (req, res) => {
   try {
-    const response = await fetch("https://api.tenrai.org/v1/seasons/now");
+    const page = req.query.page || 1;
+    const response = await fetch(
+      `https://api.tenrai.org/v1/seasons/now?page=${page}`,
+    );
 
     if (!response.ok) {
       const errorPayload = await response.json().catch(() => ({}));
@@ -76,7 +83,10 @@ const currentSeason = async (req, res) => {
       };
     });
 
-    res.json(filteredData);
+    res.json({
+      data: filteredData,
+      pagination: data.pagination || null,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Something went wrong fetching anime data" });

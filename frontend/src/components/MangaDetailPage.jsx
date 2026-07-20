@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import "../styles/AnimeDetailPage.css";
 
-import TrackerWidget from "../components/TrackerWidget";
+import TrackerWidget from "./TrackerWidget";
 
 export default function MangaDetailPage() {
   const { id } = useParams();

@@ -2,6 +2,7 @@ const { filterMangaJSONData } = require("../models/mangaModel.js");
 
 const getMangaSearch = async (req, res) => {
   try {
+    const page = req.query.page || 1;
     const mangaName = req.query.q;
 
     // Fixed !mangaName condition
@@ -10,7 +11,7 @@ const getMangaSearch = async (req, res) => {
     }
 
     const sanitizedQuery = encodeURIComponent(mangaName);
-    const tenraiURL = `https://api.tenrai.org/v1/manga?q=${sanitizedQuery}`;
+    const tenraiURL = `https://api.tenrai.org/v1/manga?q=${sanitizedQuery}&page=${page}`;
 
     const tenraiResponse = await fetch(tenraiURL);
 
@@ -40,7 +41,10 @@ const getMangaSearch = async (req, res) => {
       };
     });
 
-    res.json(filteredData);
+    res.json({
+      data: filteredData,
+      pagination: FullJSON.pagination || null,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Something went wrong fetching manga data" });
@@ -49,7 +53,9 @@ const getMangaSearch = async (req, res) => {
 
 const getTopManga = async (req, res) => {
   try {
-    const response = await fetch("https://api.tenrai.org/v1/top/manga");
+    const page = req.query.page || 1;
+
+    const response = await fetch(`https://api.tenrai.org/v1/top/manga?page=${page}`);
 
     if (!response.ok) {
       const errorPayload = await response.json().catch(() => ({}));
@@ -77,7 +83,10 @@ const getTopManga = async (req, res) => {
       };
     });
 
-    res.json(filteredData);
+    res.json({
+      data: filteredData,
+      pagination: data.pagination || null,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Something went wrong fetching manga data" });
