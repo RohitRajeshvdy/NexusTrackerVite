@@ -5,6 +5,8 @@ import "../styles/AnimeDetailPage.css";
 
 import TrackerWidget from "./TrackerWidget";
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000"
+
 export default function AnimeDetailPage() {
   const { id } = useParams();
   const [animeDetail, setAnimeDetail] = useState(null);
@@ -12,7 +14,7 @@ export default function AnimeDetailPage() {
   useEffect(() => {
     async function fetchAnimeDetail() {
       try {
-        const response = await fetch(`http://localhost:3000/api/anime/${id}`);
+        const response = await fetch(`${apiBaseUrl}/api/anime/${id}`);
         const data = await response.json();
         setAnimeDetail(data);
       } catch (error) {

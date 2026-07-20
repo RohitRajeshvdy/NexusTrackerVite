@@ -4,6 +4,8 @@ import SearchBar from "./SearchBar";
 import "../styles/Pages.css";
 import { PaginationShadCN } from "./PaginationShadCN";
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000"
+
 export default function AnimePage() {
   const [animeResult, setAnimeResult] = useState([]);
   const [currentSeason, setCurrentSeason] = useState([]);
@@ -25,8 +27,8 @@ export default function AnimePage() {
     async function loadData() {
       try {
         const endpoint = searchQuery
-          ? `http://localhost:3000/api/anime/search?q=${searchQuery}&page=${page}`
-          : `http://localhost:3000/api/anime/currentSeason?page=${page}`;
+          ? `${apiBaseUrl}/api/anime/search?q=${searchQuery}&page=${page}`
+          : `${apiBaseUrl}/api/anime/currentSeason?page=${page}`;
 
         const response = await fetch(endpoint);
         const data = await response.json();

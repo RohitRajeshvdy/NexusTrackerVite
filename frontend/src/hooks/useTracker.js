@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+
 export default function useTracker({
   mal_id,
   mediaType,
@@ -19,7 +21,7 @@ export default function useTracker({
 
       try {
         const response = await fetch(
-          `http://localhost:3000/db/getdata/${mediaType}/${mal_id}`,
+          `${apiBaseUrl}/db/getdata/${mediaType}/${mal_id}`,
         );
         if (!response.ok) throw new Error("Failed to fetch tracking data");
 
@@ -49,7 +51,7 @@ export default function useTracker({
       updatedStatus === "untracked" ? "planning" : updatedStatus;
 
     try {
-      const response = await fetch("http://localhost:3000/db/postdata", {
+      const response = await fetch(`${apiBaseUrl}/db/postdata`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -80,7 +82,7 @@ export default function useTracker({
 
     try {
       const response = await fetch(
-        `http://localhost:3000/db/deletedata/${mediaType}/${mal_id}`,
+        `${apiBaseUrl}/db/deletedata/${mediaType}/${mal_id}`,
         { method: "DELETE" },
       );
 

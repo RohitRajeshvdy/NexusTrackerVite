@@ -3,6 +3,8 @@ import Carousel from "./Carousal";
 
 import "../styles/FrontPage.css";
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000"
+
 export default function FrontPage() {
   const [dbData, setdbData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,7 +12,7 @@ export default function FrontPage() {
   useEffect(() => {
     async function getFullDB() {
       try {
-        const response = await fetch(`http://localhost:3000/db/getdata`);
+        const response = await fetch(`${apiBaseUrl}/db/getdata`);
 
         const data = await response.json();
 

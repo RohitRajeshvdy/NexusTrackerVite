@@ -4,6 +4,8 @@ import SearchBar from "./SearchBar";
 import "../styles/Pages.css";
 import { PaginationShadCN } from "./PaginationShadCN";
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000"
+
 export default function MangaPage() {
   const [mangaResult, setMangaResult] = useState([]);
   const [topManga, setTopManga] = useState([]);
@@ -26,8 +28,8 @@ export default function MangaPage() {
     async function loadData() {
       try {
         const endpoint = searchQuery
-          ? `http://localhost:3000/api/manga/search?q=${searchQuery}&page=${page}`
-          : `http://localhost:3000/api/manga/topManga?page=${page}`;
+          ? `${apiBaseUrl}/api/manga/search?q=${searchQuery}&page=${page}`
+          : `${apiBaseUrl}/api/manga/topManga?page=${page}`;
 
         const response = await fetch(endpoint);
         const data = await response.json();
