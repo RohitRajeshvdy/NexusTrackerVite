@@ -30,21 +30,10 @@ mongoose
     console.log(error);
   });
 
-const allowedOrigins = (process.env.CORS_ORIGIN || "")
-  .split(",")
-  .map((url) => url.trim());
-
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: true,
     methods: ["GET", "POST", "PATCH", "DELETE"],
-    credentials: true,
   }),
 );
 
