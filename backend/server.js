@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const rateLimit = require("express-rate-limit");
 require("dotenv").config();
 
 //Routes
@@ -37,6 +38,12 @@ app.use(
   }),
 );
 
-app.use("/api/anime", animeRoutes);
-app.use("/api/manga", mangaRoutes);
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 min
+  max: 100, // per IP
+  message: { error: "Too many requests, please try again later." },
+});
+
+app.use("/api/anime", apiLimiter, animeRoutes);
+app.use("/api/manga", apiLimiter, mangaRoutes);
 app.use("/db", trackingRoutes);
